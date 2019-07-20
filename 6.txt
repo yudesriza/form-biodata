@@ -1,0 +1,56 @@
+
+1. Create database
+	CREATE DATABASE tasking;
+
+	USE biodata;
+
+2. create tabel cities
+
+	CREATE TABLE cities(
+    		id int NOT NULL AUTO_INCREMENT,
+    		name varchar(100),
+    		PRIMARY KEY(id)
+    	);
+
+3. create tabel biodata
+
+	CREATE TABLE biodata(
+  		id int AUTO_INCREMENT,
+  		full_name varchar(100),
+    		date_of_birth date,
+    		place_of_birth_id int,
+    		phone_number varchar(20),
+    		address text,
+    		last_education ENUM		('S2','S1','D4','D3','D2','D1','SMA/SMK','SMP'),
+    		religion ENUM('Islam','Kristen','Katolik'),
+    		hobby ENUM		('Renang','Mancing','Game','Gibah','Programming'),
+    		PRIMARY KEY(id),
+    		FOREIGN KEY(place_of_birth_id) REFERENCES cities(id)
+    	);
+
+4. insert data cities
+	INSERT INTO cities(name) VALUES ('Jakarta');
+	INSERT INTO cities(name) VALUES ('Bandung');
+	INSERT INTO cities(name) VALUES ('Padang');
+
+5. insert data biodata
+
+INSERT INTO biodata (full_name, date_of_birth, place_of_birth_id, phone_number, address, last_education, religion, hobby) VALUES ('Lucinta Luna', '1992-07-12', '1', 	'081111', 'Jaksel', 'S1', 'Kristen', 'Renang');
+
+INSERT INTO biodata (full_name, date_of_birth, place_of_birth_id, phone_number, address, last_education, religion, hobby) VALUES ('Satrio', '2001-07-21', '1', '082222', 'JakBar', 'SMA/SMK', 'Islam', 'Programming');
+
+INSERT INTO biodata (full_name, date_of_birth, place_of_birth_id, phone_number, address, last_education, religion, hobby) VALUES ('Syahrini', '1989-01-01', '2', '083333', 'Bandung', 'S1', 'Islam', '');
+
+
+6. menampilkan list biodata
+
+SELECT biodata.id, biodata.full_name, biodata.place_of_birth_id, cities.name AS
+place_of_birth, biodata.date_of_birth, biodata.phone_number, biodata.last_education, biodata.religion, biodata.hobby FROM biodata INNER JOIN cities ON biodata.place_of_birth_id=cities.id;
+
+
+7. update data biodata berdasarkan id biodata
+
+	UPDATE biodata SET hobby='Game' WHERE id='3';
+
+8. hapus data biodata berdasarkan id biodata	
+	DELETE FROM biodata WHERE id='3';
